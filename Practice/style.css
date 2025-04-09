@@ -1,0 +1,122 @@
+*{
+    margin:0px;
+    padding: 0px;
+    font-family: sans-serif;
+    
+}
+.nav{
+    width: 100%;
+    /* padding:1px 0px 0px 1px; */
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow:0px 1px 0px 0px rgb(248, 251, 255);
+}
+.logo{
+    font-size: 44px;
+}
+.items{
+    margin-left: 5px;
+    display: flex;
+}
+.item{
+    margin: 2px;
+    padding: 2px;
+    display: flex;
+    font-size: 24px;
+    cursor: pointer;
+    display: inline;
+}
+.item:hover{
+    transition: 1ms;
+    border-bottom:3px solid #e0d5d5;
+}
+.login{
+    margin-right: 10px;
+    padding: 10px;
+    border-bottom:3px solid #e0d5d5;
+    border-radius: 4%;
+    font-size: 20px;
+}
+
+.hero-section{
+    width: 100%;
+    height: 80vh;
+    margin: 10px;
+    padding: 10px;
+    display: block;
+    background: url(./src/shiba.png) no-repeat center;
+    background-size: cover;
+    /* position: absolute; */
+}
+
+/* .search-card{
+   width: 250px;
+   height: 250px;
+   margin: 10px 10px 10px 10px;
+   padding: 10px;
+   display: block;
+   border-radius: 2%;
+   background-color: #fff;
+   position: fixed;
+} */
+
+.search-type{
+    margin: 10px;
+    padding: auto;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 300;
+    /* border-radius: 10%; */
+    /* background-color: #fff; */
+    /* position: relative; */
+ }
+ .search-conditions{
+    margin: 10px;
+    padding: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 300;
+    /* border-radius: 10%; */
+    /* background-color: #fff; */
+    /* position: relative; */
+ }
+ .dog{
+    margin-right: 20px;
+    border-bottom:1px solid #e0d5d5;
+ }
+.pet{
+    width: 100%;
+    /* height: 100vh; */
+    /* margin: 10px; */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    border-bottom:1px solid #e0d5d5;
+    /* position: absolute; */
+}
+.pet-card-group{
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    /* position: absolute; */
+    
+    background-color: aqua;
+    box-shadow: inset;
+}
+.pet-card{
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin: 5px;
+    /* position: absolute; */
+    background-color: aqua;
+}
