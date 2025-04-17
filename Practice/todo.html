@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo</title>
+</head>
+<body>
+
+        <label for="newTodo">新增辦事項：</label><input type="text" id="newTodo">
+        <button class="add-button" onclick="addnewTodo()">新增辦事項</button>
+        <button class="add-button" onclick="">顯示全部待辦事項</button>
+        <button class="add-button" onclick="filterTodoListCompleted()">顯示已完成待辦事項</button>
+        <button class="add-button" onclick="filterTodoListNotCompleted()">顯示未完成待辦事項</button>
+        <ul id="todoList"></ul>
+</body>
+
+<script>
+
+const storageKey = 'todolist'
+let todoList = []
+id=0;
+
+getLocalStorageTodoList=()=>{
+    let savedTodoList = localStorage.getItem(storageKey)
+    if(savedTodoList){
+        todoList = JSON.parse(savedTodoList)
+    }
+}
+getLocalStorageTodoList()
+ 
+addnewTodo=()=>{
+    let newTodo =  document.getElementById("newTodo").value
+
+    if(newTodo=== "" ){
+        alert('不得為空')
+        return
+    }
+    if (todoList.some(todo => todo.text === newTodo)) {
+        alert("不可新增重複待辦事項");
+        document.getElementById("newTodo").value = ""
+        return;
+    }
+
+    todoList.push({id:id++,text:newTodo,isCompleted:false})
+
+    saveTodoListInLocalStorage()
+    document.getElementById("newTodo").value = ""
+    displayTodoList()
+}
+
+displayTodoList=()=>{
+    let listContainer = document.getElementById("todoList");
+    listContainer.textContent = ""
+
+
+    todoList.forEach((todo,id)=> {
+        let node = document.createElement("LI"); 
+        let textnode = document.createTextNode(todo.text);  
+
+        let editButton = document.createElement("BUTTON");
+        let editButtonText = document.createTextNode("編輯");
+        editButton.onclick=()=>{
+            let editedText = prompt("請編輯待辦事項", todo.text);
+            if(editedText){
+                todoList[id].text = editedText
+                console.log(todoList[id].text)
+            }
+            saveTodoListInLocalStorage()
+            displayTodoList()
+        }
+
+        let deleteButton = document.createElement("BUTTON");
+        let deleteButtonText = document.createTextNode("刪除");
+        deleteButton.onclick=()=>{
+            todoList.splice(todoList[id],1) 
+            saveTodoListInLocalStorage()
+            displayTodoList()
+        }
+
+        let completedButton = document.createElement("BUTTON")
+        let completedButtonText = document.createTextNode("已完成");
+        // let icon = document.createElement("i"); 
+        // icon.className = "fa-solid fa-circle-check"; 
+        // completedButton.appendChild(icon); 
+        completedButton.onclick=()=>{
+            todoList[id].isCompleted = true
+            alert('已完成')
+            if(todoList[id].isCompleted===true){
+                completedButton.diabled = true
+            }
+            saveTodoListInLocalStorage()
+            displayTodoList()
+        }   
+
+        editButton.appendChild(editButtonText);
+        completedButton.appendChild(completedButtonText);
+        deleteButton.appendChild(deleteButtonText);
+        node.appendChild(textnode); 
+        node.appendChild(editButton);
+        node.appendChild(completedButton);  
+        node.appendChild(deleteButton); 
+        listContainer.appendChild(node);
+    })
+}
+
+displayTodoList(todoList)
+
+saveTodoListInLocalStorage=()=>{
+   localStorage.setItem(storageKey,JSON.stringify(todoList))
+}
+
+filterTodoListCompleted = () =>{
+    let filteredCompltedList = todoList.filter(todo => !todo.isCompleted); 
+    console.log(filteredCompltedList)
+    displayTodoList(filteredCompltedList); 
+}
+
+filterTodoListNotCompleted = () =>{
+    let filteredNotCompltedList = todoList.filter(todo => todo.isCompleted); 
+    displayTodoList(filterTodoListNotCompleted); 
+}
+
+</script>
+</html>
